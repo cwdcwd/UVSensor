@@ -26,7 +26,8 @@ void loop()
   //Use the 3.3V power pin as a reference to get a very accurate output value from sensor
   float outputVoltage = 3.3 / refLevel * uvLevel;
  
-  float uvIntensity = mapfloat(outputVoltage, 0.99, 2.8, 0.0, 15.0); //Convert the voltage to a UV intensity level
+  float uvIntensity = mapfloat(outputVoltage, 0.0, 3.3, 0.0, 15.0); //Convert the voltage to a UV intensity level
+  float uvMappedByIOLevel = mapfloat(uvLevel, 0.0, 4095, 0.0, 15.0); //Convert the voltage to a UV intensity level
 
   Serial.print("output: ");
   Serial.print(refLevel);
@@ -36,6 +37,8 @@ void loop()
 
   Serial.print(" / sensor voltage: ");
   Serial.print(outputVoltage);
+  Serial.print(" / uvMappedByIOLevel: ");
+  Serial.print(uvMappedByIOLevel);
 
   Serial.print(" / UV Intensity (mW/cm^2): ");
   Serial.print(uvIntensity);
